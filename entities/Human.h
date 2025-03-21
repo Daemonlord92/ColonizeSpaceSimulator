@@ -3,34 +3,34 @@
     #include <chrono>
     #include <memory>
 
-    namespace my_namespace {
+    namespace entities {
 
     class Human : public std::enable_shared_from_this<Human> {
         std::string name;
         std::chrono::year_month_day birthday;
         std::string gender;
         std::string occupation;
-        std::shared_ptr<int> age;
-        std::shared_ptr<int> height;
-        std::shared_ptr<int> weight;
-        std::shared_ptr<int> health;
-        std::shared_ptr<int> hunger;
-        std::shared_ptr<int> salary;
-        std::shared_ptr<int> iq;
-        std::shared_ptr<int> eq;
-        std::shared_ptr<int> strength;
-        std::shared_ptr<int> intution;
-        std::shared_ptr<int> charisma;
-        std::shared_ptr<Human> bondmate;
+        int age{};
+        int height;
+        int weight;
+        int health;
+        int hunger;
+        int salary;
+        int iq;
+        int eq;
+        int strength;
+        int intution;
+        int charisma;
+        Human* bondmate{};
 
     public:
         Human(
             std::string name,
             const std::chrono::year_month_day &birthday,
-            const std::string &gender,
+            std::string gender,
             int height,
             int weight,
-            const std::string &occupation,
+            std::string occupation,
             int salary,
             int iq,
             int eq,
@@ -39,45 +39,39 @@
             int charisma
         );
         ~Human() = default;
-        void set_name(const std::string &name);
+        void set_name(const std::string_view &name);
         void set_birthday(const std::chrono::year_month_day &birthday);
-        void set_gender(const std::string &gender);
+        void set_gender(const std::string_view &gender);
         void set_height(int height);
         void set_weight(int weight);
-        void set_occupation(const std::string &occupation);
+        void set_hunger(int hunger);
+        void set_occupation(const std::string_view &occupation);
         void set_salary(int salary);
         void set_iq(int iq);
         void set_eq(int eq);
         void set_strength(int strength);
         void set_intution(int intution);
         void set_charisma(int charisma);
-        std::string get_name();
-        int get_age();
-        std::chrono::year_month_day get_birthday();
+        void set_bondmate(Human* bondmate);
+        std::string get_name() const;
+        int get_age() const;
+        std::chrono::year_month_day get_birthday() const;
         std::string get_gender();
-        int get_height();
-        int get_weight();
-        int get_health();
-        int get_hunger();
-        std::string get_occupation();
-        int get_salary();
-        int get_iq();
-        int get_eq();
-        int get_strength();
-        int get_intution();
-        int get_charisma();
-        void display();
-        void feed();
-        void work();
-        void fight();
-        void research();
-        void explore();
-        void heal();
-        void age_up();
-        void death();
-        void train(auto* task);
-        void bond(Human* human);
-        bool sex(const Human* human);
+        int get_height() const;
+        int get_weight() const;
+        int get_health() const;
+        int get_hunger() const;
+        std::string get_gender() const;
+        std::string get_occupation() const;
+        int get_salary() const;
+        int get_iq() const;
+        int get_eq() const;
+        int get_strength() const;
+        int get_intution() const;
+        int get_charisma() const;
+        Human* get_bondmate() const;
+        void display() const;
+
     };
 
     } // namespace my_namespace

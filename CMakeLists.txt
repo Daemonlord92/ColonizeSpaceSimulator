@@ -9,4 +9,8 @@ add_executable(ColonizeSpaceSimulator main.cpp
         entities/Planet.cpp
         entities/Planet.h
         entities/StarSystem.cpp
-        entities/StarSystem.h)
+        entities/StarSystem.h
+        helpers/HumanHelper.cpp
+        helpers/HumanHelper.h
+        entities/Food.cpp
+        entities/Food.h)
