@@ -1,17 +1,14 @@
-//
-// Created by Legio on 3/20/2025.
-//
-
 #include "StarSystem.h"
-
 #include <iostream>
-#include <bits/ranges_algo.h>
+#include <utility>
+#include <algorithm>
 
+namespace entities {
 StarSystem::StarSystem(std::string designation, std::string name, int distance_from_earth, int size_of_star_system,
                        double gravitial_mass, double luminosity, double temperature, double age, double metallicity, double gravitial_pull,
                        double radiation, double magnetic_field, double solar_wind) {
-    this->designation = designation;
-    this->name = name;
+    this->designation = std::move(designation);
+    this->name = std::move(name);
     this->distance_from_earth = distance_from_earth;
     this->size_of_star_system = size_of_star_system;
     this->gravitial_mass = gravitial_mass;
@@ -24,8 +21,7 @@ StarSystem::StarSystem(std::string designation, std::string name, int distance_f
     this->magnetic_field = magnetic_field;
     this->solar_wind = solar_wind;
     this->planets = std::vector<Planet*>();
-    this->star_system_grid = std::vector<std::vector<auto&>>();
-    this->star_system_entities = std::vector<auto&>();
+    this->star_system_grid = std::vector<std::vector<StarSystemGrid>>(); // Use objects instead of references
 }
 
 StarSystem::~StarSystem() = default;
@@ -87,8 +83,8 @@ void StarSystem::add_planet(Planet *planet) {
 }
 
 void StarSystem::remove_planet(Planet *planet) {
-    auto it = std::ranges::remove(this->planets, planet);
-    (void)this->planets.erase(it.begin(), it.end());
+    auto it = std::remove(this->planets.begin(), this->planets.end(), planet);
+    this->planets.erase(it, this->planets.end());
 }
 
 std::string StarSystem::get_designation() {
@@ -147,7 +143,7 @@ std::vector<Planet *> StarSystem::get_planets() {
     return this->planets;
 }
 
-std::vector<std::vector<__resharper_unknown_type>> StarSystem::get_star_system_grid() {
+std::vector<std::vector<StarSystemGrid>> StarSystem::get_star_system_grid() { // Use objects instead of references
     return this->star_system_grid;
 }
 
@@ -169,4 +165,5 @@ void StarSystem::display() {
     for (auto& planet : this->planets) {
         planet->display();
     }
+}
 }

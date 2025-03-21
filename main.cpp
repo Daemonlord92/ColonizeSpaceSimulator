@@ -1,6 +1,11 @@
 #include <iostream>
+#include <wx/app.h>
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+#include "ui/Gui.h"
+
+wxIMPLEMENT_APP_NO_MAIN(ui::GuiApp);
+
+int main(int argc, char** argv) {
+    wxEntry(argc, argv);
     return 0;
 }
